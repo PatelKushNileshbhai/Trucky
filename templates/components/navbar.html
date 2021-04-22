@@ -1,0 +1,60 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/components/navbar.css' %}">
+<nav class="row navbar navbar-expand-lg navbar-dark sticky-top">
+
+    <img id="img-logo" src="{% static 'images/logo1.jpg' %}" alt="logo" class="rounded mx-3">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto text-center">
+
+            <li class="nav-item active nav-hover mr-3">
+                <a class="nav-link text-dark rounded" href="{% url 'Home' %}"><i class="far fa-home-lg-alt"></i> Home<span class="sr-only">(current)</span></a>
+            </li>
+
+            <!-- <li class="nav-item px-3 nav-hover ">
+          <a class="nav-link text-dark" href="#">Link</a>
+        </li> -->
+
+            <li class="nav-item  nav-hover mr-3">
+                <div class="btn-group">
+                    <button type="button" class="btn bg-transparent dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user text-dark"></i> User
+                </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Profile' %}"><i class="fas fa-id-card pr-3"></i> Profile</a>
+                        <a class="dropdown-item" href="{% url 'Login' %}"><i class="fas fa-sign-in pr-3"></i> Login</a>
+                        <a class="dropdown-item" href="{% url 'Register' %}"><i class="fas fa-user-plus pr-3"></i> Register</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt pr-3"></i> Log-Out</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item rounded  nav-hover mr-3">
+                <a class="nav-link text-dark" href=""><i class="fas fa-shopping-cart px-2"></i> Cart</a>
+            </li>
+
+            <!-- <li class="nav-item  nav-hover mr-3">
+          <a class="nav-link disabled text-dark" href="#">Disabled</a>
+        </li> -->
+
+            <li class="nav-item nav-hover mr-3">
+                <a href="{% url 'Aboutus' %}" class="nav-link text-dark"><i class="fas fa-info-square"></i> About</a>
+            </li>
+
+            <li class="nav-item nav-hover mr-3">
+                <a href="http://127.0.0.1:8000/admin/" class="nav-link text-dark"><i class="fas fa-user-cog"></i>Admin</a>
+            </li>
+
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0" method="GET" action="">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='query' id="query">
+            <button class="btn btn-outline-success font-weight-bolder my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>

@@ -8,6 +8,14 @@ from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetP
 
 # Create your views here.
 
+def AboutUS(request):
+    return render(request,'About.html')
+
+def Home(request):
+    return render(request,'Home.html')
+
+
+
 def register_user(request):
     form = CreateUserForm()
     if request.method == 'POST':
