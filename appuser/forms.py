@@ -11,7 +11,7 @@ class CreateUserForm(UserCreationForm):
                                 widget=forms.PasswordInput)
     class Meta:
         model = OWNUSER
-        fields = ['username','first_name','last_name','email','mobile_no','state','city','area']
+        fields = ['username','first_name','last_name','email','mobile_no','state','city','company_name','address']
         labels = {'email':'Email','password2':'Confirm'}
 
 class ProfileForm(UserChangeForm):

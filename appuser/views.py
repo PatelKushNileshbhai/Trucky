@@ -5,8 +5,6 @@ from django.contrib.auth import login,logout,authenticate,update_session_auth_ha
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
 
 
-from product.forms import ShopForm
-from product.models import Shop,ConfirmedOrder
 
 # Create your views here.
 
@@ -29,9 +27,11 @@ def login_user(request):
             if form.is_valid():
                 name = form.cleaned_data['username']
                 passw = form.cleaned_data['password'] 
+                print(name , passw , 'lkfajdfas')
                 user =  authenticate(username=name,password=passw)
                 if user is not None:
                     login(request,user)
+                    print('klsdjrlef')
                     return redirect('Profile')
     else:
         return redirect('Profile')
@@ -39,42 +39,10 @@ def login_user(request):
     return render(request,'appuser/login.html',context)
 
 
-
-
 def Profile(request):
-    if request.user.is_superuser:
-        if request.user.is_authenticated:
-            users = OWNUSER.objects.all()
-            if request.method == 'POST':
-                form = AdminProfileForm(request.POST,instance = request.user)
-                if form.is_valid():
-                    form.save()
-                    messages.success(request,"Profile Updated")
-            form = AdminProfileForm(instance = request.user)
-            coorder = ConfirmedOrder.objects.filter(user = request.user)
-            shops = Shop.objects.filter(shop_owner =request.user)
-            if not shops.exists():
-                shops = None
-            context={'form':form,'name':request.user , "users":users ,"shops":shops ,'coorder':coorder }
-            return render(request,'appuser/profile.html',context)
-        else:
-            return redirect('Login')
-    else:
-        if request.user.is_authenticated:
-            form = ProfileForm(instance = request.user)
-            if request.method == 'POST':
-                form = ProfileForm(request.POST,instance = request.user)
-                if form.is_valid():
-                    form.save()
-                    messages.success(request,"Profile Updated")
-            coorder = ConfirmedOrder.objects.filter(user = request.user)
-            shops = Shop.objects.filter(shop_owner =request.user)
-            if not shops.exists():
-                shops = None
-            context={'form':form,'name':request.user , "shops":shops , 'coorder':coorder  }
-            return render(request,'appuser/profile.html',context)
-        else:
-            return redirect('Login')
+    context = {}
+    return render(request,'appuser/Profile.html',context)
+
 
 def log_out(request):
     logout(request)
