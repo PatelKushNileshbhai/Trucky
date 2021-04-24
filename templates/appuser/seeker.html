@@ -2,12 +2,14 @@
 <title>Profile</title>
 {% endblock head %} {% block body %}
 <div class="row">
-    <h1>Profile</h1>
+    <h1>seeker</h1>
     <p>{{user.username}}</p>
-    <p>{{user.area}}</p>
+
+
+    <a href="{% url 'Make_Req' %}" class="btn btn-secondary">
+        Make a Request
+    </a>
 </div>
-
-
 
 
 {% endblock body %}

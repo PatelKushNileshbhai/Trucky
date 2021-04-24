@@ -5,9 +5,22 @@
 
 
 {% block body %}
-    <div>
-        <p>home</p>
+    <div class="row justify-content-around" style="height:100vh;">
+        <a class="btn btn-primary my-auto" href="{% url 'Login' %}"> Login</a>
+        <a class="btn btn-dark my-auto" href="{% url 'Register' %}"> Register</a>
+        <a class="btn btn-secondary my-auto" href="#About" >About</a>
     </div>
+
+
+    <div id="About" class="row justify-content-center">
+        <h1>About</h1>
+    </div>
+
+    
+    <div class="row justify-content-center">
+    </div>
+
+
 
     <div id="about">
     </div>

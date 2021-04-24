@@ -55,7 +55,9 @@ class provide(models.Model):
     permits = models.CharField(null = True,max_length=20)
     typeof_vehicle = models.CharField(null = False,max_length=20)
     typeof_payment = models.CharField(null = True,max_length=20)
-    provider = models.ForeignKey(OWNUSER,on_delete=models.CASCADE)
+    who_provider = models.ForeignKey(OWNUSER,null=True,blank=True,on_delete=models.CASCADE,related_name="who_is_provider")
+    who_seeker = models.ForeignKey(OWNUSER,null=True,blank=True, on_delete=models.CASCADE,related_name="who_is_seeker")
+    accepted = models.BooleanField(default=False)
 
 
 class seek(models.Model):
@@ -66,7 +68,8 @@ class seek(models.Model):
     typeof_vehicle = models.CharField(null = True,max_length=20)
     nameof_goods = models.CharField(null = False,max_length=20)
     status = models.IntegerField(default = 0)
-    seeker = models.ForeignKey(OWNUSER,on_delete=models.CASCADE)
+    who_seeker = models.ForeignKey(OWNUSER,on_delete=models.CASCADE,related_name="who_is_seeker_in_seeker")
+    who_provider = models.ForeignKey(OWNUSER,null=True,on_delete=models.CASCADE,related_name="who_is_provider_in_seeker")
 
 
 class deal(models.Model):

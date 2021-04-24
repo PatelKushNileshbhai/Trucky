@@ -3,7 +3,7 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
-
+from .models import *
 
 
 # Create your views here.
@@ -49,7 +49,52 @@ def login_user(request):
 
 def Profile(request):
     context = {}
-    return render(request,'appuser/Profile.html',context)
+    if request.user.is_authenticated:
+        context['user'] = request.user
+        return render(request,'appuser/Profile.html',context)
+    else:
+        return redirect('Login')
+
+def Provider_page(request):
+    providers = provide.objects.filter(who_provider=request.user,accepted=False)
+
+    context = {
+        'providers':providers
+    }
+
+
+    return render(request,'appuser/provider.html',context)
+
+def discard_provider(request,pid):
+    temp = provide.objects.get(id=pid)
+    # temp.delete()
+    return redirect('Profile')
+
+def make_req(request):
+    if not request.user.is_authenticated:
+        return redirect('Login')
+    form = SeekerForm()
+    if request.method == 'POST':
+        form = SeekerForm(request.POST)
+        if form.is_valid():
+            form.save(commit=False)
+            form.accepted = False
+            form.who_seeker = request.user
+            form.save()
+            print('hwlo')
+            return redirect('Profile')
+    context = {'form':form}
+    return render(request,'appuser/seekerform.html',context)
+
+def accept_provider(request,pid):
+    temp = provide.objects.get(id=pid)
+    temp.accepted = True
+    temp.save()
+    return redirect('Profile')
+
+
+def Seeker_page(request):
+    return render(request,'appuser/seeker.html')
 
 
 def log_out(request):

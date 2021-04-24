@@ -26,3 +26,10 @@ class AdminProfileForm(UserChangeForm):
         model = OWNUSER
         fields = '__all__'
         exclude = ['password']
+
+
+class SeekerForm(ModelForm):
+    class Meta:
+        model = provide
+        fields = '__all__'
+        exclude = ['who_seeker','accepted']

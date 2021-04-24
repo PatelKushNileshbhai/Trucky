@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block head %}
+<title>Profile</title>
+{% endblock head %} {% block body %}
+<div class="row">
+    <h1>Provider</h1>
+</div>
+
+<div class="row my-4">
+
+    <table style="width:100%">
+        <tr>
+            <th>seeker name</th>
+            <th>Pickup</th>
+            <th>Dest_city</th>
+            <th>Action</th>
+        </tr>
+        {% for p in providers %}
+        <tr>
+            <td>{{p.who_seeker}}</td>
+            <td>{{p.p_pickup_city}}</td>
+            <td>{{p.p_dest_city}}</td>
+            <td>
+                <a href="{% url 'Accepted_pro' p.id %}" class="btn btn-dark">Accept</a>
+                <a href="{% url 'Discard_pro' p.id %}" class="btn btn-dark">Discard</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock body %}

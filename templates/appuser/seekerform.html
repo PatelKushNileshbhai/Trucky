@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block head %}
+<title>Make A req</title>
+{% endblock head %} {% block body %}
+<div class="row">
+
+    <form mehtod="POST">
+        {% csrf_token %} {% for field in form %}
+        <div class="row text-center py-2">
+
+            <div class="col-md-4 font-weight-bold">
+                {{ field.label_tag }}
+            </div>
+            <div class="col-md-8">
+                {{ field | add_class:"form-field"}}
+            </div>
+            <p>
+                {{ field.errors|striptags }}
+            </p>
+        </div>
+        {% endfor %}
+        <input type="submit" value="register" class="btn btn-primary" />
+    </form>
+
+
+</div>
+{% endblock body %}
