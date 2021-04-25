@@ -1,10 +1,29 @@
-{% extends 'base.html' %} {% block head %}
+{% extends 'base.html' %}{% load static %} {% block head %}
 <title>Profile</title>
 {% endblock head %} {% block body %}
 <div class="row">
     <h1>Profile</h1>
-    <p>{{user.username}}</p>
-    <p>{{user.area}}</p>
+</div>
+<hr class="bg bg-dark">
+<div class="row justify-content-center">
+    <div class="col-3">
+
+        <p>Username</p>
+        <p>Password</p>
+        <p>UPI_NO</p>
+        <p>Mobile_NO</p>
+        <p>Address</p>
+
+
+    </div>
+    <div class="col-3">
+        <p>{{user.username}}</p>
+        <p>{{user.password}}</p>
+        <p>{{user.UPI_NO}}</p>
+        <p>{{user.mobile_no}}</p>
+        <p>{{user.address}}</p>
+
+    </div>
 </div>
 
 

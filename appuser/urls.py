@@ -14,7 +14,7 @@ urlpatterns = [
     path('show_data/<str:id>/',show_data,name="show_data"),
     
 
-    path('makeform/',make_req,name="Make_Req"),
+    path('makeformseeker/',make_req,name="Make_Req"),
 
     path('provider/',Provider_page,name="Provider"),
     path('seeker/',Seeker_page,name="Seeker"),

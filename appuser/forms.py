@@ -30,6 +30,12 @@ class AdminProfileForm(UserChangeForm):
 
 class SeekerForm(ModelForm):
     class Meta:
+        model = seek
+        fields = '__all__'
+        exclude = ['who_seeker','status']
+
+class ProviderForm(ModelForm):
+    class Meta:
         model = provide
         fields = '__all__'
-        exclude = ['who_seeker','accepted']
+        exclude=['accepted','who_provider']

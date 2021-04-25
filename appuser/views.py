@@ -56,39 +56,50 @@ def Profile(request):
         return redirect('Login')
 
 def Provider_page(request):
-    providers = provide.objects.filter(who_provider=request.user,accepted=False)
+
+    if not request.user.is_authenticated:
+        return redirect('Login')
+    
+    form = ProviderForm()
+    if request.method == 'POST':
+        form = ProviderForm(request.POST)
+        if form.is_valid():
+            ft = form.save(commit=False)
+            return redirect('Provider')
+    # providers = provide.objects.filter(who_provider=request.user,accepted=False)
+    providers = seek.objects.filter(who_provider=request.user,status=0)
 
     context = {
-        'providers':providers
+        'providers':providers,
+        'form':form
     }
 
 
     return render(request,'appuser/provider.html',context)
 
 def discard_provider(request,pid):
-    temp = provide.objects.get(id=pid)
+    temp = seek.objects.get(id=pid)
     # temp.delete()
     return redirect('Profile')
 
 def make_req(request):
     if not request.user.is_authenticated:
         return redirect('Login')
-    form = SeekerForm()
+    form = SeekerForm(request.POST or None)
     if request.method == 'POST':
         form = SeekerForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
-            form.accepted = False
-            form.who_seeker = request.user
-            form.save()
-            print('hwlo')
+            ft = form.save(commit=False)
+            ft.who_seeker = request.user
+            ft.status = 0
+            ft.save()
             return redirect('Profile')
     context = {'form':form}
     return render(request,'appuser/seekerform.html',context)
 
 def accept_provider(request,pid):
-    temp = provide.objects.get(id=pid)
-    temp.accepted = True
+    temp = seek.objects.get(id=pid)
+    temp.status = 1
     temp.save()
     return redirect('Profile')
 

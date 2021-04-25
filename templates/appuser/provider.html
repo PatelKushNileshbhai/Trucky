@@ -1,9 +1,10 @@
-{% extends 'base.html' %} {% block head %}
-<title>Profile</title>
+{% extends 'base.html' %} {% load widget_tweaks %} {% load static %} {% block head %}
+<title>Provider</title>
 {% endblock head %} {% block body %}
 <div class="row">
     <h1>Provider</h1>
 </div>
+
 
 <div class="row my-4">
 
@@ -15,18 +16,41 @@
             <th>Action</th>
         </tr>
         {% for p in providers %}
-        <tr>
+        <tr class="">
             <td>{{p.who_seeker}}</td>
-            <td>{{p.p_pickup_city}}</td>
-            <td>{{p.p_dest_city}}</td>
+            <td>{{p.s_pickup_city}}</td>
+            <td>{{p.s_dest_city}}</td>
             <td>
                 <a href="{% url 'Accepted_pro' p.id %}" class="btn btn-dark">Accept</a>
-                <a href="{% url 'Discard_pro' p.id %}" class="btn btn-dark">Discard</a>
+                <a href="{% url 'Discard_pro' p.id %}" class="btn btn-danger">Discard</a>
             </td>
         </tr>
         {% endfor %}
     </table>
 </div>
+
+<hr class="bg bg-dark">
+<div class="row justify-content-center bg-transparent">
+    <form method="POST" novalidate class="form-control bg-transparent">
+        <div class="row text-center py-2 my-2">
+            {% csrf_token %} {% for field in form %}
+
+            <div class="col-md-3 font-weight-bold">
+                {{ field.label_tag }}
+            </div>
+            <div class="col-md-6 my-2">
+                {{ field | add_class:"form-field form-control"}}
+            </div>
+            <p class="col-md-3 my-2">
+                {{ field.errors|striptags }}
+            </p>
+            {% endfor %}
+        </div>
+        <input type="submit" value="Register" class="btn btn-primary mx-auto" />
+    </form>
+</div>
+
+
 
 
 {% endblock body %}

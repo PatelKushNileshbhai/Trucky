@@ -56,7 +56,6 @@ class provide(models.Model):
     typeof_vehicle = models.CharField(null = False,max_length=20)
     typeof_payment = models.CharField(null = True,max_length=20)
     who_provider = models.ForeignKey(OWNUSER,null=True,blank=True,on_delete=models.CASCADE,related_name="who_is_provider")
-    who_seeker = models.ForeignKey(OWNUSER,null=True,blank=True, on_delete=models.CASCADE,related_name="who_is_seeker")
     accepted = models.BooleanField(default=False)
 
 
