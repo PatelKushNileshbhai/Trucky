@@ -1,0 +1,49 @@
+{% extends 'base.html' %}{% load static %} {% load widget_tweaks %} {% block head %}
+<title>Search</title>
+{% endblock head %} {% block body %}
+<div class="row">
+    <h1>Search</h1>
+
+    <form method="POST" novalidate>
+        {% csrf_token %} {% for field in form %}
+        <div class="row text-center py-2">
+
+            <div class="col-md-4 font-weight-bold">
+                {{ field.label_tag }}
+            </div>
+            <div class="col-md-8">
+                {{ field | add_class:"form-field"}}
+            </div>
+            <!-- <p>    
+                            {{ field.errors|striptags }} 
+                        </p> -->
+        </div>
+        {% endfor %}
+        <input type="submit" value="register" class="btn btn-primary" />
+    </form>
+</div>
+<hr class="bg bg-dark">
+
+<div class="row border border-dark">
+    {% if data == None %} dfsfdfg {% endif %}
+    <table style="width:100%">
+        <tr>
+            <th>seeker name</th>
+            <th>Pickup</th>
+            <th>Dest_city</th>
+            <th>Weight</th>
+        </tr>
+        {% for p in data %}
+        <tr class="">
+            <td>{{p.who_provider}}</td>
+            <td>{{p.p_pickup_city}}</td>
+            <td>{{p.p_dest_city}}</td>
+            <td>{{p.remaining_weight}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock body %}

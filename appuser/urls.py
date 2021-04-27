@@ -15,6 +15,7 @@ urlpatterns = [
     
 
     path('makeformseeker/',make_req,name="Make_Req"),
+    path('search/',search,name="Search"),
 
     path('provider/',Provider_page,name="Provider"),
     path('seeker/',Seeker_page,name="Seeker"),

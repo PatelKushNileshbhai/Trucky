@@ -39,3 +39,9 @@ class ProviderForm(ModelForm):
         model = provide
         fields = '__all__'
         exclude=['accepted','who_provider']
+
+
+class SearchForm(forms.Form):
+    pcity = forms.CharField(required=False)
+    dcity = forms.CharField(required=False)
+    weight = forms.IntegerField(required=False)

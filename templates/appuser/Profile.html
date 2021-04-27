@@ -13,20 +13,54 @@
         <p>UPI_NO</p>
         <p>Mobile_NO</p>
         <p>Address</p>
+        <p>Firstname</p>
+        <p>Lastname</p>
+        <p>Email</p>
+        <p>State</p>
+        <p>City</p>
 
 
     </div>
     <div class="col-3">
         <p>{{user.username}}</p>
         <p>{{user.password}}</p>
-        <p>{{user.UPI_NO}}</p>
+        <p>{{user.UPI_no}}</p>
         <p>{{user.mobile_no}}</p>
         <p>{{user.address}}</p>
+        <p>{{user.first_name}}</p>
+        <p>{{user.last_name}}</p>
+        <p>{{user.email}}</p>
+        <p>{{user.state}}</p>
+        <p>{{user.city}}</p>
 
     </div>
 </div>
+<hr class="bg bg-dark">
 
-
+<div class="row my-4">
+    <h1 class="text-center">
+        Request
+    </h1>
+    <table style="width:100%">
+        <tr>
+            <th>seeker name</th>
+            <th>Pickup</th>
+            <th>Dest_city</th>
+            <th>Action</th>
+        </tr>
+        {% for p in providers %}
+        <tr class="">
+            <td>{{p.who_seeker}}</td>
+            <td>{{p.s_pickup_city}}</td>
+            <td>{{p.s_dest_city}}</td>
+            <td>
+                <a href="{% url 'Accepted_pro' p.id %}" class="btn btn-dark">Accept</a>
+                <a href="{% url 'Discard_pro' p.id %}" class="btn btn-danger">Discard</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 
 {% endblock body %}

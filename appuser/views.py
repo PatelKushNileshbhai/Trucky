@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
 from .models import *
+from django.db.models import Q
 
 
 # Create your views here.
@@ -50,10 +51,45 @@ def login_user(request):
 def Profile(request):
     context = {}
     if request.user.is_authenticated:
+        providers = seek.objects.filter(who_provider=request.user,status=0)
         context['user'] = request.user
+        context['providers'] = providers
         return render(request,'appuser/Profile.html',context)
     else:
         return redirect('Login')
+
+def search(request):
+    context={}
+    form = SearchForm()
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            print('here')
+            pcity = form.cleaned_data['pcity']
+            print("pcity",len(pcity))
+            dcity = form.cleaned_data['dcity']
+            weight = form.cleaned_data['weight']
+
+            try:
+                pc = City.objects.filter(city_name=pcity)[0]
+            except:
+                pc=request.user.city
+            try:
+                dc = City.objects.filter(city_name=dcity)[0]
+            except:
+                dc = request.user.city
+
+            print("safsf" , pc ,dc )
+
+            data1 = provide.objects.all()
+
+            data = data1.filter( (Q(p_pickup_city = pc) | Q(p_dest_city = dc) )  | Q(remaining_weight__lte = weight))
+            # data = provide.objects.filter(p_pickup_city = form.cleaned_data['dcity'])
+            print(data)
+            context['data'] =data
+            
+    context['form']=form
+    return render(request,'appuser/search.html',context)
 
 def Provider_page(request):
 
@@ -67,10 +103,10 @@ def Provider_page(request):
             ft = form.save(commit=False)
             return redirect('Provider')
     # providers = provide.objects.filter(who_provider=request.user,accepted=False)
-    providers = seek.objects.filter(who_provider=request.user,status=0)
+    # providers = seek.objects.filter(who_provider=request.user,status=0)
 
     context = {
-        'providers':providers,
+        # 'providers':providers,
         'form':form
     }
 
