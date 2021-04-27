@@ -9,7 +9,6 @@
     <div class="col-3">
 
         <p>Username</p>
-        <p>Password</p>
         <p>UPI_NO</p>
         <p>Mobile_NO</p>
         <p>Address</p>
@@ -23,7 +22,6 @@
     </div>
     <div class="col-3">
         <p>{{user.username}}</p>
-        <p>{{user.password}}</p>
         <p>{{user.UPI_no}}</p>
         <p>{{user.mobile_no}}</p>
         <p>{{user.address}}</p>
@@ -46,6 +44,7 @@
             <th>seeker name</th>
             <th>Pickup</th>
             <th>Dest_city</th>
+            <th>Weight</th>
             <th>Action</th>
         </tr>
         {% for p in providers %}
@@ -53,6 +52,7 @@
             <td>{{p.who_seeker}}</td>
             <td>{{p.s_pickup_city}}</td>
             <td>{{p.s_dest_city}}</td>
+            <td>{{p.total_weight}}</td>
             <td>
                 <a href="{% url 'Accepted_pro' p.id %}" class="btn btn-dark">Accept</a>
                 <a href="{% url 'Discard_pro' p.id %}" class="btn btn-danger">Discard</a>

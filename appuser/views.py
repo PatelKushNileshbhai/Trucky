@@ -83,7 +83,7 @@ def search(request):
 
             data1 = provide.objects.all()
 
-            data = data1.filter( (Q(p_pickup_city = pc) | Q(p_dest_city = dc) )  | Q(remaining_weight__lte = weight))
+            data = data1.filter( (Q(p_pickup_city = pc) & Q(p_dest_city = dc) )  & Q(remaining_weight__gte = weight))
             # data = provide.objects.filter(p_pickup_city = form.cleaned_data['dcity'])
             print(data)
             context['data'] =data
@@ -135,6 +135,9 @@ def make_req(request):
 
 def accept_provider(request,pid):
     temp = seek.objects.get(id=pid)
+    pro = provide.objects.get(id = temp.who_provider.id)
+    pro.remaining_weight -= temp.total_weight
+    pro.save()
     temp.status = 1
     temp.save()
     return redirect('Profile')

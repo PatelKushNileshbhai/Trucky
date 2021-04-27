@@ -6,28 +6,7 @@
 </div>
 
 
-<div class="row my-4">
 
-    <table style="width:100%">
-        <tr>
-            <th>seeker name</th>
-            <th>Pickup</th>
-            <th>Dest_city</th>
-            <th>Action</th>
-        </tr>
-        {% for p in providers %}
-        <tr class="">
-            <td>{{p.who_seeker}}</td>
-            <td>{{p.s_pickup_city}}</td>
-            <td>{{p.s_dest_city}}</td>
-            <td>
-                <a href="{% url 'Accepted_pro' p.id %}" class="btn btn-dark">Accept</a>
-                <a href="{% url 'Discard_pro' p.id %}" class="btn btn-danger">Discard</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
 
 <hr class="bg bg-dark">
 <div class="row justify-content-center bg-transparent">
@@ -46,7 +25,7 @@
             </p>
             {% endfor %}
         </div>
-        <input type="submit" value="Register" class="btn btn-primary mx-auto" />
+        <input type="submit" value="Submit" class="btn btn-primary mx-auto" />
     </form>
 </div>
 
